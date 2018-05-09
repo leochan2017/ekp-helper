@@ -1,4 +1,4 @@
-var $fdDescription, $fdTaskId, $fdTypeId, $fdDate, $fdSituation, $fdTime;
+var $fdDescription, $fdTaskId, $fdTypeId, $fdDate, $fdSituation, $fdTime, $subBtn;
 var __STORE_PRE_STR__ = 'ekp-helper-'
 
 // 从EKP 拷贝的
@@ -63,7 +63,7 @@ function writeReport(argument) {
     setTimeout(function() {
       // 工作任务
       if (fdTypeId) $fdTypeId.val(fdTypeId)
-    }, 800)
+    }, 1000)
 
   }
 
@@ -106,11 +106,21 @@ $(function() {
   // 工时
   $fdTime = $('input[name="fdTime"]')
 
-  var htmlStr = '<div class="ekp-helper tool-btn"><h1>欢迎使用EKP辅助插件1.0</h1><p>本插件旨在帮助你快速填报工时</p><p>使用场景:</p><p>需要提交多次重复内容的表单</p><p>使用方法:</p><p>1.填写完整下面表单</p><p>2.点击"存储"按钮</p><p>3.下次进来该页面，只需点击"读取"按钮则可加载上次保存的数据，进行快速填报</p><div id="saveStorage" class="button">存储</div><div id="writeReport" class="button">读取</div></div>'
+  var htmlStr = '<div class="ekp-helper tool-btn"><h1>欢迎使用EKP辅助插件1.0</h1><p>本插件旨在帮助你快速填报工时</p><p>使用场景: 需要提交多次重复内容的表单</p><p>使用方法:</p><p>1.填写完整下面表单</p><p>2.点击"保存"按钮，会询问您是否存储数据，点击"确定"</p><p>3.下次进来该页面时，只需点击"读取数据"按钮则可加载上次保存的数据，进行快速填报</p><div id="writeReport" class="button">读取数据</div></div>'
 
   $('body').prepend(htmlStr)
 
   $('#writeReport').click(writeReport)
 
   $('#saveStorage').click(saveStorage)
+
+  setTimeout(function() {
+    // 保存按钮
+    $subBtn = $('div#lui-id-2')
+
+    $subBtn.click(function() {
+      var r = confirm('需要存储当前表单内容到EKP辅助插件吗？')
+      if (r) saveStorage()
+    })
+  }, 1000)
 })
