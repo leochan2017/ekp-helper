@@ -1,0 +1,1 @@
+window.open('http://product.landray.com.cn/km/workhours/km_workhours_main/kmWorkhoursMain.do?method=addDialog')
