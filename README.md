@@ -9,8 +9,9 @@
 
 EKP谷歌浏览器辅助扩展 v1.0
 
-## 插件地址
+## 项目主页
 [https://github.com/leochan2017/ekp-helper](https://github.com/leochan2017/ekp-helper)
+
 
 ## 插件说明
 - 填报工时: 帮助你快速在EKP中提交多次内容重复度高的记录
