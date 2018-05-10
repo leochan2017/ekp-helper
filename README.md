@@ -10,7 +10,7 @@
 谷歌浏览器EKP辅助扩展 v1.0
 
 ## 插件地址
-[EKP-Helper](https://github.com/leochan2017/ekp-helper)
+[https://github.com/leochan2017/ekp-helper](https://github.com/leochan2017/ekp-helper)
 
 ## 插件说明
 - 填报工时: 帮助你快速在EKP中提交多次内容重复度高的记录
@@ -34,6 +34,8 @@ Chrome 浏览器
 - 下次进入填报工时页面时，只需点击"读取数据"按钮则可加载上次保存的数据，进行快速填报。
 
 
+## 运行环境
+Chrome 浏览器扩展程序
 
 
 ## To Do List
@@ -41,7 +43,7 @@ Chrome 浏览器
 - 显示已经填报的日期
 
 
-## 更新历时
+## 更新历史
 - 2018.05.09 v1.0版发布
 
 
