@@ -2,13 +2,15 @@
 
 ## EKP Helper - A Chrome Plugin Tool for EKP
 ![By Leo](https://img.shields.io/badge/Powered_by-Leo-red.svg?style=flat) 
+![Libscore](https://img.shields.io/libscore/s/jQuery.svg?style=flat-square)
 ![Github file size](https://img.shields.io/github/size/leochan2017/ekp-helper/app.crx.svg)
-![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)
- ![Libscore](https://img.shields.io/libscore/s/jQuery.svg?style=flat-square)
 ![GitHub last commit](https://img.shields.io/github/last-commit/leochan2017/ekp-helper.svg)
+![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)
 
 谷歌浏览器EKP辅助扩展 v1.0
 
+## 插件地址
+[EKP-Helper](https://github.com/leochan2017/ekp-helper)
 
 ## 插件说明
 - 填报工时: 帮助你快速在EKP中提交多次内容重复度高的记录
