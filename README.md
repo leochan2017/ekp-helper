@@ -7,7 +7,7 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/leochan2017/ekp-helper.svg)
 ![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)
 
-EKP谷歌浏览器辅助扩展 v1.1.0
+EKP谷歌浏览器辅助扩展
 
 ## 项目主页
 [https://github.com/leochan2017/ekp-helper](https://github.com/leochan2017/ekp-helper)
@@ -43,6 +43,8 @@ Chrome浏览器扩展程序
 
 
 ## 更新历史
+- 2018.05.14 v1.1.1
+    - 调整插件配置，改正插件名字，防止以后每次更新不会覆盖之前一个的情况出现
 - 2018.05.14 v1.1.0 版发布
     - 改用popup操作习惯
     - 新增快捷查看工时列表功能

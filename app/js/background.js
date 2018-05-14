@@ -106,7 +106,7 @@ $(function() {
   // 工时
   $fdTime = $('input[name="fdTime"]')
 
-  var htmlStr = '<div class="ekp-helper tool-btn"><h1>欢迎使用EKP辅助插件1.0</h1><p>本插件旨在帮助你快速填报工时</p><p>使用场景: 需要提交多次重复内容的表单</p><p>使用方法:</p><p>1.填写完整下面的工时表单</p><p>2.点击"保存"按钮时，插件弹出询问窗否需要存储数据，点击"确定"</p><p>3.下次进入填报工时页面时，只需点击"读取数据"按钮则可加载上次保存的数据，进行快速填报</p><div id="writeReport" class="button">读取数据</div></div>'
+  var htmlStr = '<div class="ekp-helper tool-btn"><h1>欢迎使用EKP辅助插件1.1.1</h1><p>本插件旨在帮助你快速填报工时</p><p>使用场景: 需要提交多次重复内容的表单</p><p>使用方法:</p><p>1.填写完整下面的工时表单</p><p>2.点击"保存"按钮时，插件弹出询问窗否需要存储数据，点击"确定"</p><p>3.下次进入填报工时页面时，只需点击"读取数据"按钮则可加载上次保存的数据，进行快速填报</p><div id="writeReport" class="button">读取数据</div></div>'
 
   $('body').prepend(htmlStr)
 
