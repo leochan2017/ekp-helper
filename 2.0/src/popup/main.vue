@@ -27,7 +27,8 @@ export default {
       open('http://product.landray.com.cn/km/workhours/km_workhours_calendar/worcalendar.jsp')
     },
     openWriteWorkReportPage() {
-      open('http://product.landray.com.cn/km/workhours/km_workhours_main/kmWorkhoursMain.do?method=addDialog')
+      open('../options/index.html')
+      // open('http://product.landray.com.cn/km/workhours/km_workhours_main/kmWorkhoursMain.do?method=addDialog')
     }
   }
 }
@@ -61,6 +62,7 @@ export default {
         cursor: pointer;
         &:hover {
           opacity: 0.6;
+          cursor: pointer;
         }
         /*border: 1px solid red;*/
         img {
