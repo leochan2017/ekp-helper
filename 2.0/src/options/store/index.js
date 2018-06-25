@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import demo from './demo'
+import home from './home'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
-    demo
+    home
   },
   strict: process.env.NODE_ENV !== 'production'
 })

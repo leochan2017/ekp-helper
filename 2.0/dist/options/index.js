@@ -63,7 +63,7 @@
 /******/ 	}
 /******/
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "916279c1cbf57653b35a"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "ec7255fdb8e6057f6019"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -2695,47 +2695,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'home',
   data: function data() {
     return {
-      // 任务类型选项列表
-      fdTaskList: [{
-        label: '非工作',
-        value: '15ea933ab548bd4a59ae3bd4e2fab986'
-      }, {
-        label: '运维类',
-        value: '15ea933d0e70cbb1febf27e4e18b5e32'
-      }, {
-        label: '发布类',
-        value: '15ea9342a3b3b7e1bb6c648419abcb3f'
-      }, {
-        label: '工具类',
-        value: '15ea93443fe6fd779ffa031466584e9e'
-      }, {
-        label: '支持类',
-        value: '15ea934693f62689f3f8a2c409788956'
-      }, {
-        label: '学习类',
-        value: '15ea934863797f0f3d5b957494c9b572'
-      }, {
-        label: '管理类',
-        value: '15ea934af13b578ecf0d3cf4241807d6'
-      }, {
-        label: '运营类',
-        value: '15ea934ce38599434c6bc5f4bd3ae6f3'
-      }, {
-        label: '测试类',
-        value: '15ea934eed59ad37288fafa4bb390934'
-      }, {
-        label: '研发类',
-        value: '15ea9350c5dd0cae3f20d1442f0b4e54'
-      }, {
-        label: '需求类',
-        value: '15ea9351dd3f73fad89a3434944b42e8'
-      }],
       // 工作任务选项列表
       fdTypeList: [],
       form: {
@@ -2746,32 +2710,22 @@ __webpack_require__.r(__webpack_exports__);
         fdItemNames: '', // 空着的不知道为何
         fdDeptId: '15d7dbcdb3d23c8a92bb46741878d46c',
         fdDeptName: '',
-        // 下面的是表单内容
+        // 下面的是视图上表单内容
         fdDescription: '开发', // 内容
         fdTaskId: '', // 任务类型
         fdTypeId: '', // 工作任务
         fdDate: '2018-06-23', // 日期
         fdSituation: 50, // 完成情况
         fdTime: 1 // 工时
+      }
+    };
+  },
 
-        // 完整表单:
-        // form: {
-        //   fdId: '16426d63bbed76f52750c7a4d7db417d',
-        //   method_GET: 'addDialog',
-        //   fdDescription: 't',
-        //   fdTaskId: '15ea9350c5dd0cae3f20d1442f0b4e54',
-        //   fdTypeId: '15ea937991f9c77d751d4f645d2a38e8',
-        //   fdDate: '2018-06-22',
-        //   fdSituation: 100,
-        //   fdTime: 1,
-        //   fdItemNames: '',
-        //   docCreateTime: '2018-06-22 15:07',
-        //   docCreatorId: '14dd0f7a58fa5b2e6aaca5845888b114',
-        //   docCreatorName: '陈子元',
-        //   fdDeptId: '15d7dbcdb3d23c8a92bb46741878d46c',
-        //   fdDeptName: '产品研发部_产品研发组',
-        // }
-      } };
+  computed: {
+    // 任务类型选项列表
+    fdTaskList: function fdTaskList() {
+      return this.$store.state.home.fdTaskList || [];
+    }
   },
   mounted: function mounted() {
     this.getData();
@@ -2830,13 +2784,14 @@ __webpack_require__.r(__webpack_exports__);
         if (new RegExp('(' + k + ')').test(fmt)) fmt = fmt.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ('00' + o[k]).substr(('' + o[k]).length));
       }return fmt;
     },
-    generateId: function generateId() {
+    // 产品N位随机数
+    generateId: function generateId(n) {
       var chars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
 
       var nums = '';
 
-      for (var i = 0; i < 32; i++) {
-        var id = parseInt(Math.random() * 61);
+      for (var i = 0; i < n; i++) {
+        var id = parseInt(Math.random() * 16);
         nums += chars[id];
       }
 
@@ -2845,56 +2800,52 @@ __webpack_require__.r(__webpack_exports__);
     onSubmit: function onSubmit() {
       var _this2 = this;
 
-      return babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()( /*#__PURE__*/babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var postData, ajaxURL, res;
-        return babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                postData = _this2.form;
+      var postData = this.form;
+      postData.fdId = this.generateId(32);
+      postData.docCreateTime = this.formatDate(new Date(), 'yyyy-MM-dd hh:mm');
 
-                postData.fdId = _this2.generateId();
-                postData.docCreateTime = _this2.formatDate(new Date(), 'yyyy-MM-dd hh:mm');
-                // return console.log(postData)
-                ajaxURL = 'http://product.landray.com.cn/km/workhours/km_workhours_main/kmWorkhoursMain.do?method=save&s_ajax=true';
-                _context2.next = 6;
-                return _this2.$http.post(ajaxURL, postData);
+      // return console.log(postData)
 
-              case 6:
-                res = _context2.sent;
+      var ajaxURL = 'http://product.landray.com.cn/km/workhours/km_workhours_main/kmWorkhoursMain.do?method=save&s_ajax=true';
 
-                if (res.body.status) _this2.$notify.success({ message: '提交成功，奥耶~！' });
-
-              case 8:
-              case 'end':
-                return _context2.stop();
-            }
-          }
-        }, _callee2, _this2);
-      }))();
+      this.$http.post(ajaxURL, postData, {
+        'emulateJSON': true
+      }).then(function (succ) {
+        if (!succ.body.status) return;
+        _this2.$notify.success({ message: '提交成功，奥耶~！' });
+      }, function (err) {
+        console.log('error callback', err);
+      });
     },
-    reset: function reset() {},
+    reset: function reset() {
+      this.form.fdDescription = '';
+      this.form.fdTaskId = '';
+      this.form.fdTypeId = '';
+      this.form.fdDate = '';
+      this.form.fdSituation = '';
+      this.form.fdTime = '';
+    },
     showDialog: function showDialog() {},
 
     // 改变任务类型
     fdTaskChangeHandle: function fdTaskChangeHandle(value) {
       var _this3 = this;
 
-      return babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()( /*#__PURE__*/babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+      return babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()( /*#__PURE__*/babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
         var ajaxURL, res;
-        return babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        return babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
                 _this3.fdTypeList = [];
                 _this3.form.fdTypeId = '';
 
                 ajaxURL = 'http://product.landray.com.cn/km/workhours/km_workhours_type/kmWorkhoursType.do?method=getTypeByTask&fdTask=' + value + '&s_ajax=true';
-                _context3.next = 5;
+                _context2.next = 5;
                 return _this3.$http.get(ajaxURL);
 
               case 5:
-                res = _context3.sent;
+                res = _context2.sent;
 
 
                 _this3.fdTypeList = res.body;
@@ -2904,10 +2855,10 @@ __webpack_require__.r(__webpack_exports__);
 
               case 8:
               case 'end':
-                return _context3.stop();
+                return _context2.stop();
             }
           }
-        }, _callee3, _this3);
+        }, _callee2, _this3);
       }))();
     }
   }
@@ -77474,9 +77425,9 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_router__WEBPACK_IMPORTED_MOD
 
 /***/ }),
 
-/***/ "./src/options/store/demo.js":
+/***/ "./src/options/store/home.js":
 /*!***********************************!*\
-  !*** ./src/options/store/demo.js ***!
+  !*** ./src/options/store/home.js ***!
   \***********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -77484,7 +77435,40 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_router__WEBPACK_IMPORTED_MOD
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 var state = {
-  title: 'xxx'
+    fdTaskList: [{
+        label: '非工作',
+        value: '15ea933ab548bd4a59ae3bd4e2fab986'
+    }, {
+        label: '运维类',
+        value: '15ea933d0e70cbb1febf27e4e18b5e32'
+    }, {
+        label: '发布类',
+        value: '15ea9342a3b3b7e1bb6c648419abcb3f'
+    }, {
+        label: '工具类',
+        value: '15ea93443fe6fd779ffa031466584e9e'
+    }, {
+        label: '支持类',
+        value: '15ea934693f62689f3f8a2c409788956'
+    }, {
+        label: '学习类',
+        value: '15ea934863797f0f3d5b957494c9b572'
+    }, {
+        label: '管理类',
+        value: '15ea934af13b578ecf0d3cf4241807d6'
+    }, {
+        label: '运营类',
+        value: '15ea934ce38599434c6bc5f4bd3ae6f3'
+    }, {
+        label: '测试类',
+        value: '15ea934eed59ad37288fafa4bb390934'
+    }, {
+        label: '研发类',
+        value: '15ea9350c5dd0cae3f20d1442f0b4e54'
+    }, {
+        label: '需求类',
+        value: '15ea9351dd3f73fad89a3434944b42e8'
+    }]
 };
 
 var getters = {};
@@ -77493,10 +77477,10 @@ var mutations = {};
 var actions = {};
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  state: state,
-  getters: getters,
-  mutations: mutations,
-  actions: actions
+    state: state,
+    getters: getters,
+    mutations: mutations,
+    actions: actions
 });
 
 /***/ }),
@@ -77512,7 +77496,7 @@ var actions = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _demo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./demo */ "./src/options/store/demo.js");
+/* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./home */ "./src/options/store/home.js");
 
 
 
@@ -77522,7 +77506,7 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_1_
 
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   modules: {
-    demo: _demo__WEBPACK_IMPORTED_MODULE_2__["default"]
+    home: _home__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   strict: "development" !== 'production'
 }));

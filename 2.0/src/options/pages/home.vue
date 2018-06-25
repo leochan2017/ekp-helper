@@ -31,7 +31,6 @@
             <el-slider v-model="form.fdSituation" :step="10" show-stops></el-slider>
           </el-form-item>
           <el-form-item label="所耗工时">
-            <!-- <el-input v-model="form.fdTime"></el-input> -->
             <el-input-number v-model="form.fdTime" :min="0" label="所耗工时"></el-input-number>
           </el-form-item>
         </el-form>
@@ -48,41 +47,6 @@ export default {
   name: 'home',
   data() {
     return {
-      // 任务类型选项列表
-      fdTaskList: [{
-        label: '非工作',
-        value: '15ea933ab548bd4a59ae3bd4e2fab986'
-      }, {
-        label: '运维类',
-        value: '15ea933d0e70cbb1febf27e4e18b5e32'
-      }, {
-        label: '发布类',
-        value: '15ea9342a3b3b7e1bb6c648419abcb3f'
-      }, {
-        label: '工具类',
-        value: '15ea93443fe6fd779ffa031466584e9e'
-      }, {
-        label: '支持类',
-        value: '15ea934693f62689f3f8a2c409788956'
-      }, {
-        label: '学习类',
-        value: '15ea934863797f0f3d5b957494c9b572'
-      }, {
-        label: '管理类',
-        value: '15ea934af13b578ecf0d3cf4241807d6'
-      }, {
-        label: '运营类',
-        value: '15ea934ce38599434c6bc5f4bd3ae6f3'
-      }, {
-        label: '测试类',
-        value: '15ea934eed59ad37288fafa4bb390934'
-      }, {
-        label: '研发类',
-        value: '15ea9350c5dd0cae3f20d1442f0b4e54'
-      }, {
-        label: '需求类',
-        value: '15ea9351dd3f73fad89a3434944b42e8'
-      }],
       // 工作任务选项列表
       fdTypeList: [],
       form: {
@@ -93,7 +57,7 @@ export default {
         fdItemNames: '', // 空着的不知道为何
         fdDeptId: '15d7dbcdb3d23c8a92bb46741878d46c',
         fdDeptName: '',
-        // 下面的是表单内容
+        // 下面的是视图上表单内容
         fdDescription: '开发', // 内容
         fdTaskId: '', // 任务类型
         fdTypeId: '', // 工作任务
@@ -101,23 +65,12 @@ export default {
         fdSituation: 50, // 完成情况
         fdTime: 1 // 工时
       }
-      // 完整表单:
-      // form: {
-      //   fdId: '16426d63bbed76f52750c7a4d7db417d',
-      //   method_GET: 'addDialog',
-      //   fdDescription: 't',
-      //   fdTaskId: '15ea9350c5dd0cae3f20d1442f0b4e54',
-      //   fdTypeId: '15ea937991f9c77d751d4f645d2a38e8',
-      //   fdDate: '2018-06-22',
-      //   fdSituation: 100,
-      //   fdTime: 1,
-      //   fdItemNames: '',
-      //   docCreateTime: '2018-06-22 15:07',
-      //   docCreatorId: '14dd0f7a58fa5b2e6aaca5845888b114',
-      //   docCreatorName: '陈子元',
-      //   fdDeptId: '15d7dbcdb3d23c8a92bb46741878d46c',
-      //   fdDeptName: '产品研发部_产品研发组',
-      // }
+    }
+  },
+  computed: {
+    // 任务类型选项列表
+    fdTaskList() {
+      return this.$store.state.home.fdTaskList || []
     }
   },
   mounted() {
@@ -156,29 +109,44 @@ export default {
           fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)));
       return fmt;
     },
-    generateId() {
+    // 产品N位随机数
+    generateId(n) {
       let chars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f']
 
       let nums = ''
 
-      for (let i = 0; i < 32; i++) {
-        let id = parseInt(Math.random() * 61)
+      for (let i = 0; i < n; i++) {
+        let id = parseInt(Math.random() * 16)
         nums += chars[id]
       }
 
       return nums
     },
-    async onSubmit() {
+    onSubmit() {
       let postData = this.form
-      postData.fdId = this.generateId()
+      postData.fdId = this.generateId(32)
       postData.docCreateTime = this.formatDate(new Date, 'yyyy-MM-dd hh:mm')
+
       // return console.log(postData)
+
       const ajaxURL = 'http://product.landray.com.cn/km/workhours/km_workhours_main/kmWorkhoursMain.do?method=save&s_ajax=true'
-      const res = await this.$http.post(ajaxURL, postData)
-      if (res.body.status) this.$notify.success({ message: '提交成功，奥耶~！' })
+
+      this.$http.post(ajaxURL, postData, {
+        'emulateJSON': true
+      }).then(succ => {
+        if (!succ.body.status) return
+        this.$notify.success({ message: '提交成功，奥耶~！' })
+      }, err => {
+        console.log('error callback', err)
+      })
     },
     reset() {
-
+      this.form.fdDescription = ''
+      this.form.fdTaskId = ''
+      this.form.fdTypeId = ''
+      this.form.fdDate = ''
+      this.form.fdSituation = ''
+      this.form.fdTime = ''
     },
     showDialog() {
 
