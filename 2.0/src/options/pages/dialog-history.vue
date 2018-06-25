@@ -7,14 +7,14 @@
       <el-table-column prop="fdTypeName" label="工作任务"></el-table-column>
       <el-table-column prop="fdSituation" label="完成情况(%)"></el-table-column>
       <el-table-column prop="fdTime" label="所耗工时"></el-table-column>
-      <el-table-column label="操作">
+      <el-table-column label="操作" width="130">
         <template slot-scope="scope">
-          <el-popover placement="top-start" trigger="hover" content="载入此条数据">
-            <el-button slot="reference" type="primary" size="mini" icon="el-icon-download" @click="loadItem(scope.row)"></el-button>
-          </el-popover>
-          <el-popover placement="top-start" trigger="hover" content="删除此条数据">
-            <el-button slot="reference" type="danger" size="mini" icon="el-icon-delete" @click="delItem(scope.row)"></el-button>
-          </el-popover>
+          <el-tooltip effect="dark" content="载入此条数据" placement="top">
+            <el-button type="primary" size="mini" icon="el-icon-download" @click="loadItem(scope.row)"></el-button>
+          </el-tooltip>
+          <el-tooltip effect="dark" content="删除此条数据" placement="top">
+            <el-button type="danger" size="mini" icon="el-icon-delete" @click="delItem(scope.row)"></el-button>
+          </el-tooltip>
         </template>
       </el-table-column>
     </el-table>

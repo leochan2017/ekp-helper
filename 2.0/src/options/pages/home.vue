@@ -6,9 +6,11 @@
     <el-main class="home-body">
       <el-card>
         <div slot="header" class="clearfix">
-          <span>工时填报</span>
-          <span v-if="form.docCreatorName"> - ({{ form.docCreatorName }})</span>
-          <el-button style="float: right; padding: 3px 0" type="text" @click="dialogHistoryDisplay = true">查看历史填报数据</el-button>
+          <template v-if="form.docCreatorName">
+            <span>欢迎您</span>
+            <span>, {{ form.docCreatorName }}</span>
+            <el-button style="float: right; padding: 3px 0" type="text" @click="dialogHistoryDisplay = true">查看历史填报数据</el-button>
+          </template>
         </div>
         <el-form ref="form" :rules="rules" :model="form" label-width="80px">
           <el-form-item label="内容描述" prop="fdDescription">
