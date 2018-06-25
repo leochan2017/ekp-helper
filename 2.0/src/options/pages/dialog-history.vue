@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="载入历史数据" :visible.sync="show" :before-close="closehide" width="70%">
+  <el-dialog title="历史数据" :visible.sync="show" :before-close="closehide" width="70%">
     <el-table :data="tableData" :default-sort="defaultSort" height="600" border stripe style="width: 100%">
       <el-table-column prop="fdDate" sortable label="填报日期"></el-table-column>
       <el-table-column prop="title" label="内容描述" width="180"></el-table-column>

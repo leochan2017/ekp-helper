@@ -157,6 +157,8 @@ export default {
       postData.fdId = this.generateId(32)
       postData.docCreateTime = this.formatDate(new Date, 'yyyy-MM-dd hh:mm')
 
+      postData.fdDate = this.formatDate(postData.fdDate, 'yyyy-MM-dd')
+
       // return console.log(postData)
 
       const ajaxURL = 'km_workhours_main/kmWorkhoursMain.do?method=save&s_ajax=true'
