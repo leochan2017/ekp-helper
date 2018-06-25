@@ -39,7 +39,7 @@ Vue.http.interceptors.push((request, next) => {
   let loading = ''
   let tLoading = setTimeout(_ => {
     loading = ElementUI.Loading.service({ fullscreen: true })
-  }, 800)
+  }, 600)
 
   next(response => {
     clearTimeout(tLoading)

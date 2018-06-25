@@ -12,6 +12,9 @@
           <el-popover placement="top-start" trigger="hover" content="载入此条数据">
             <el-button slot="reference" type="primary" size="mini" icon="el-icon-download" @click="loadItem(scope.row)"></el-button>
           </el-popover>
+          <el-popover placement="top-start" trigger="hover" content="删除此条数据">
+            <el-button slot="reference" type="danger" size="mini" icon="el-icon-delete" @click="delItem(scope.row)"></el-button>
+          </el-popover>
         </template>
       </el-table-column>
     </el-table>
@@ -47,7 +50,7 @@ export default {
       this.$emit('hide', isUpdate === true, data)
     },
     async getData() {
-      let ajaxURL = 'km_workhours_main/kmWorkhoursMain.do?method=worcalendar&pageno=1&s_seq=0.05993460439126297&s_ajax=true'
+      let ajaxURL = 'km_workhours_main/kmWorkhoursMain.do?method=worcalendar&pageno=1&s_ajax=true'
 
       // 加了也没用
       // ajaxURL += `&fdStart=2018-06-25+00%3A00`
@@ -60,6 +63,18 @@ export default {
     },
     loadItem(item) {
       this.closehide(true, item)
+    },
+    delItem(item) {
+      this.$confirm('确定删除该条记录吗?一旦删除不可恢复哦!').then(async _ => {
+        const fdId = item.fdId
+        if (!fdId) return console.error('取不到fdId')
+        const ajaxURL = `km_workhours_main/kmWorkhoursMain.do?method=delete&fdId=${fdId}&s_ajax=true`
+
+        const res = await this.$http.get(ajaxURL)
+        if (!res.body.status) return
+        this.$notify.success({ message: '删除成功' })
+        this.getData()
+      }).catch(_ => {})
     }
   }
 }

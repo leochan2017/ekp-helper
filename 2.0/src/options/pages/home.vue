@@ -8,23 +8,23 @@
         <div slot="header" class="clearfix">
           <span>工时填报</span>
           <span v-if="form.docCreatorName"> - ({{ form.docCreatorName }})</span>
-          <el-button style="float: right; padding: 3px 0" type="text" @click="dialogHistoryDisplay = true">载入历史数据</el-button>
+          <el-button style="float: right; padding: 3px 0" type="text" @click="dialogHistoryDisplay = true">查看历史填报数据</el-button>
         </div>
-        <el-form ref="form" :model="form" label-width="80px">
-          <el-form-item label="内容描述">
+        <el-form ref="form" :rules="rules" :model="form" label-width="80px">
+          <el-form-item label="内容描述" prop="fdDescription">
             <el-input type="textarea" v-model="form.fdDescription"></el-input>
           </el-form-item>
-          <el-form-item label="任务类型">
+          <el-form-item label="任务类型" prop="fdTaskId">
             <el-select v-model="form.fdTaskId" placeholder="请选择任务类型" @change="fdTaskChangeHandle">
               <el-option v-for="item in fdTaskList" :label="item.label" :key="item.value" :value="item.value"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="工作任务">
+          <el-form-item label="工作任务" prop="fdTypeId">
             <el-select v-model="form.fdTypeId" placeholder="请选择工作任务">
               <el-option v-for="item in fdTypeList" :label="item.hoursTypeFdName" :key="item.value" :value="item.hoursTypeFdId"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="完成日期">
+          <el-form-item label="完成日期" prop="fdDate">
             <el-date-picker type="date" placeholder="选择日期" v-model="form.fdDate"></el-date-picker>
           </el-form-item>
           <el-form-item label="完成情况">
@@ -61,7 +61,7 @@ export default {
         docCreatorId: '',
         docCreatorName: '',
         fdItemNames: '', // 空着的不知道为何
-        // fdDeptId: '15d7dbcdb3d23c8a92bb46741878d46c', // 实在取不到啊
+        // fdDeptId: '', // 实在取不到啊
         fdDeptName: '',
         // 下面的是视图上表单内容
         fdDescription: '', // 内容
@@ -70,6 +70,12 @@ export default {
         fdDate: '', // 日期
         fdSituation: 0, // 完成情况
         fdTime: 0 // 工时
+      },
+      rules: {
+        fdDescription: [{ required: true, message: '请输入内容', trigger: 'blur' }],
+        fdTaskId: [{ required: true, message: '请选择任务类型', trigger: 'change' }],
+        fdTypeId: [{ required: true, message: '请选择工作任务', trigger: 'change' }],
+        fdDate: [{ required: true, message: '请选择日期', trigger: 'change' }]
       }
     }
   },
@@ -87,6 +93,8 @@ export default {
     async historyDialogHide(isUpdate, data) {
       // console.log(data)
       if (isUpdate && data) {
+        this.$refs['form'].resetFields()
+
         this.form.fdDescription = data.fdDescription
 
         // 任务类型
@@ -109,6 +117,7 @@ export default {
 
         this.form.fdSituation = data.fdSituation
         this.form.fdTime = data.fdTime
+
       }
       this.dialogHistoryDisplay = false
     },
@@ -152,12 +161,22 @@ export default {
 
       return nums
     },
+    // 校验表单
+    validateData() {
+      let flag = false
+      this.$refs['form'].validate(valid => valid ? flag = true : flag = false)
+      return flag
+    },
     onSubmit() {
+      if (!this.validateData()) return
+
       let postData = this.form
       postData.fdId = this.generateId(32)
       postData.docCreateTime = this.formatDate(new Date, 'yyyy-MM-dd hh:mm')
 
-      postData.fdDate = this.formatDate(postData.fdDate, 'yyyy-MM-dd')
+      if (typeof postData.fdDate === 'object') {
+        postData.fdDate = this.formatDate(postData.fdDate, 'yyyy-MM-dd')
+      }
 
       // return console.log(postData)
 
@@ -179,6 +198,7 @@ export default {
       this.form.fdDate = ''
       this.form.fdSituation = 0
       this.form.fdTime = 0
+      this.$refs['form'].resetFields()
     },
     // 改变任务类型
     async fdTaskChangeHandle(fdTaskId, cb) {
