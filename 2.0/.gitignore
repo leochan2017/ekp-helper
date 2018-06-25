@@ -1,7 +1,6 @@
 # for extension
 config.codekit3
 *.pem
-*.zip
 
 # pkg manager
 .DS_Store
