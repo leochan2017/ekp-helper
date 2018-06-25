@@ -1,9 +1,8 @@
-![Logo](https://github.com/leochan2017/ekp-helper/blob/master/app/img/icon128.png?raw=true)
+![Logo](https://github.com/leochan2017/ekp-helper/blob/master/2.0/src/static/icons/icon128.png?raw=true)
 
 ## EKP Helper - A Chrome Plugin Tool for EKP
 ![By Leo](https://img.shields.io/badge/Powered_by-Leo-red.svg?style=flat) 
-![Libscore](https://img.shields.io/libscore/s/jQuery.svg?style=flat-square)
-![Github file size](https://img.shields.io/github/size/leochan2017/ekp-helper/app.crx.svg)
+![Github file size](https://github.com/leochan2017/ekp-helper/blob/master/2.0/dist.crx.svg)
 ![GitHub last commit](https://img.shields.io/github/last-commit/leochan2017/ekp-helper.svg)
 ![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)
 
@@ -23,7 +22,7 @@ Chrome浏览器扩展程序
 
 
 ## 如何安装
-- 下载 [app.crx](https://github.com/leochan2017/ekp-helper/blob/master/app.crx?raw=true)
+- 下载 [app.crx](https://github.com/leochan2017/ekp-helper/blob/master/2.0/dist.crxraw=true)
 - OS 用户 直接拖拽到 chrome 扩展程序安装
 - WIN 用户需要把代码clone下来，然后Chrome --> 扩展程序 --> 加载已解压的扩展程序
 
@@ -38,11 +37,15 @@ Chrome浏览器扩展程序
 
 
 ## To Do List
-- 加载填报数据以列表呈现，用户通过选择对应条记录快速写入内容
-- 显示已经填报的日期
+- 没有，你来提需求？
 
 
 ## 更新历史
+- 2018.06.25 v2.0.0
+    - 介是你一腚没有用过的船新版本
+    - 船新的UI
+    - 船新的体验
+    - 加载历史数据以列表呈现
 - 2018.05.14 v1.1.1
     - 调整插件配置，改正插件名字，防止以后每次更新不会覆盖之前一个的情况出现
 - 2018.05.14 v1.1.0 版发布
