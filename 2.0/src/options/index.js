@@ -10,6 +10,8 @@ Vue.use(VueResource)
 
 Vue.use(ElementUI)
 
+Vue.http.options.root = 'http://product.landray.com.cn/km/workhours/'
+
 Vue.http.interceptors.push((request, next) => {
   request.headers.set('Access-Control-Allow-Origin', 'http://product.landray.com.cn')
   // request.headers.set('Pragma', 'no-cache')

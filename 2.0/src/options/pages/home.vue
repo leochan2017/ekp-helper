@@ -8,7 +8,7 @@
         <div slot="header" class="clearfix">
           <span>工时填报</span>
           <span v-if="form.docCreatorName"> - ({{ form.docCreatorName }})</span>
-          <el-button style="float: right; padding: 3px 0" type="text" @click="showDialog">载入历史数据</el-button>
+          <el-button style="float: right; padding: 3px 0" type="text" @click="dialogHistoryDisplay = true">载入历史数据</el-button>
         </div>
         <el-form ref="form" :model="form" label-width="80px">
           <el-form-item label="内容描述">
@@ -40,13 +40,19 @@
         <el-button type="danger" @click="reset">清空</el-button>
       </div>
     </el-main>
+    <dialog-history v-if="dialogHistoryDisplay" :show="dialogHistoryDisplay" @hide="historyDialogHide"></dialog-history>
   </div>
 </template>
 <script>
+import dialogHistory from './dialog-history'
 export default {
   name: 'home',
+  components: {
+    dialogHistory
+  },
   data() {
     return {
+      dialogHistoryDisplay: false, // 载入历史 弹窗显示
       // 工作任务选项列表
       fdTypeList: [],
       form: {
@@ -55,15 +61,15 @@ export default {
         docCreatorId: '',
         docCreatorName: '',
         fdItemNames: '', // 空着的不知道为何
-        fdDeptId: '15d7dbcdb3d23c8a92bb46741878d46c',
+        // fdDeptId: '15d7dbcdb3d23c8a92bb46741878d46c', // 实在取不到啊
         fdDeptName: '',
         // 下面的是视图上表单内容
-        fdDescription: '开发', // 内容
+        fdDescription: '', // 内容
         fdTaskId: '', // 任务类型
         fdTypeId: '', // 工作任务
-        fdDate: '2018-06-23', // 日期
-        fdSituation: 50, // 完成情况
-        fdTime: 1 // 工时
+        fdDate: '', // 日期
+        fdSituation: 0, // 完成情况
+        fdTime: 0 // 工时
       }
     }
   },
@@ -75,13 +81,37 @@ export default {
   },
   mounted() {
     this.getUserInfo()
-
-    // dev code
-    const fdTaskId = '15ea9350c5dd0cae3f20d1442f0b4e54'
-    this.form.fdTaskId = fdTaskId
-    this.fdTaskChangeHandle(fdTaskId)
   },
   methods: {
+    // 控制 载入历史 弹窗 关闭回调
+    async historyDialogHide(isUpdate, data) {
+      // console.log(data)
+      if (isUpdate && data) {
+        this.form.fdDescription = data.fdDescription
+
+        // 任务类型
+        let fdTaskId = data.fdTaskId
+        if (!fdTaskId) fdTaskId = this.$store.getters.getTaskIdFormName(data.fdTaskName)
+        this.form.fdTaskId = fdTaskId
+
+        // 工作任务
+        let fdTypeId = data.fdTypeId
+        if (!fdTypeId) {
+          await this.fdTaskChangeHandle(fdTaskId, arr => {
+            const obj = arr.find(item => item.hoursTypeFdName == data.fdTypeName)
+            if (obj) fdTypeId = obj.hoursTypeFdId
+          })
+        }
+        this.form.fdTypeId = fdTypeId
+
+        // 日期不需要填上去
+        // this.form.fdDate = data.fdDate
+
+        this.form.fdSituation = data.fdSituation
+        this.form.fdTime = data.fdTime
+      }
+      this.dialogHistoryDisplay = false
+    },
     async getUserInfo() {
       const ajaxURL = 'http://java.landray.com.cn/sys/person/sys_person_zone/sysPersonZone.do?method=info'
       const res = await this.$http.get(ajaxURL)
@@ -129,7 +159,7 @@ export default {
 
       // return console.log(postData)
 
-      const ajaxURL = 'http://product.landray.com.cn/km/workhours/km_workhours_main/kmWorkhoursMain.do?method=save&s_ajax=true'
+      const ajaxURL = 'km_workhours_main/kmWorkhoursMain.do?method=save&s_ajax=true'
 
       this.$http.post(ajaxURL, postData, {
         'emulateJSON': true
@@ -145,25 +175,26 @@ export default {
       this.form.fdTaskId = ''
       this.form.fdTypeId = ''
       this.form.fdDate = ''
-      this.form.fdSituation = ''
-      this.form.fdTime = ''
-    },
-    showDialog() {
-
+      this.form.fdSituation = 0
+      this.form.fdTime = 0
     },
     // 改变任务类型
-    async fdTaskChangeHandle(value) {
+    async fdTaskChangeHandle(fdTaskId, cb) {
       this.fdTypeList = []
       this.form.fdTypeId = ''
 
-      const ajaxURL = `http://product.landray.com.cn/km/workhours/km_workhours_type/kmWorkhoursType.do?method=getTypeByTask&fdTask=${value}&s_ajax=true`
+      const ajaxURL = `km_workhours_type/kmWorkhoursType.do?method=getTypeByTask&fdTask=${fdTaskId}&s_ajax=true`
 
       const res = await this.$http.get(ajaxURL)
 
-      this.fdTypeList = res.body
+      const data = res.body
+
+      this.fdTypeList = data
+
+      cb && cb(data)
 
       // dev code
-      this.form.fdTypeId = res.body[0].hoursTypeFdId
+      // this.form.fdTypeId = res.body[0].hoursTypeFdId
     }
   }
 }

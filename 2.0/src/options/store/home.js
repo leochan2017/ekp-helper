@@ -35,7 +35,14 @@ const state = {
     }]
 }
 
-const getters = {}
+const getters = {
+    getTaskIdFormName: state => name => {
+        let value = ''
+        const obj = state.fdTaskList.find(item => item.label == name)
+        if (obj) value = obj.value || ''
+        return value
+    }
+}
 const mutations = {}
 
 const actions = {}
