@@ -5,7 +5,7 @@ config.codekit3
 
 # pkg manager
 .DS_Store
-dist
+dist/
 node_modules/
 npm-debug.log*
 yarn-debug.log*
