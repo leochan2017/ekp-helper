@@ -74,7 +74,7 @@ export default {
     }
   },
   mounted() {
-    this.getData()
+    this.getUserInfo()
 
     // dev code
     const fdTaskId = '15ea9350c5dd0cae3f20d1442f0b4e54'
@@ -82,7 +82,7 @@ export default {
     this.fdTaskChangeHandle(fdTaskId)
   },
   methods: {
-    async getData() {
+    async getUserInfo() {
       const ajaxURL = 'http://java.landray.com.cn/sys/person/sys_person_zone/sysPersonZone.do?method=info'
       const res = await this.$http.get(ajaxURL)
       const data = res.body
@@ -137,7 +137,7 @@ export default {
         if (!succ.body.status) return
         this.$notify.success({ message: '提交成功，奥耶~！' })
       }, err => {
-        console.log('error callback', err)
+        console.error('error callback', err)
       })
     },
     reset() {
