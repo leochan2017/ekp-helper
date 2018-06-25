@@ -1,5 +1,4 @@
 # for extension
-dist/
 config.codekit3
 *.pem
 *.zip

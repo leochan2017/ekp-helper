@@ -94,12 +94,12 @@ export default {
         fdDeptId: '15d7dbcdb3d23c8a92bb46741878d46c',
         fdDeptName: '',
         // 下面的是表单内容
-        fdDescription: '开发',
-        fdTaskId: '',
-        fdTypeId: '',
-        fdDate: '2018-06-22',
-        fdSituation: 0,
-        fdTime: 0
+        fdDescription: '开发', // 内容
+        fdTaskId: '', // 任务类型
+        fdTypeId: '', // 工作任务
+        fdDate: '2018-06-23', // 日期
+        fdSituation: 50, // 完成情况
+        fdTime: 1 // 工时
       }
       // 完整表单:
       // form: {
@@ -122,6 +122,11 @@ export default {
   },
   mounted() {
     this.getData()
+
+    // dev code
+    const fdTaskId = '15ea9350c5dd0cae3f20d1442f0b4e54'
+    this.form.fdTaskId = fdTaskId
+    this.fdTaskChangeHandle(fdTaskId)
   },
   methods: {
     async getData() {
@@ -188,6 +193,9 @@ export default {
       const res = await this.$http.get(ajaxURL)
 
       this.fdTypeList = res.body
+
+      // dev code
+      this.form.fdTypeId = res.body[0].hoursTypeFdId
     }
   }
 }
