@@ -2,7 +2,7 @@
 
 ## EKP Helper - A Chrome Plugin Tool for EKP
 ![By Leo](https://img.shields.io/badge/Powered_by-Leo-red.svg?style=flat) 
-![Github file size](https://github.com/leochan2017/ekp-helper/blob/master/dist.crx.svg)
+![Github file size](https://img.shields.io/github/size/leochan2017/ekp-helper/dist.crx.svg)
 ![GitHub last commit](https://img.shields.io/github/last-commit/leochan2017/ekp-helper.svg)
 ![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)
 
@@ -30,7 +30,7 @@ Chrome浏览器扩展程序
 - WIN 用户
     - 1.下载[ext.zip](https://github.com/leochan2017/ekp-helper/blob/master/dist.zip?raw=true) 
     - 2.解压ext.zip
-    - 2.Chrome --> 设置 --> 更多工具 --> 扩展程序 --> 加载已解压的扩展程序 --> 选择 /dist/ 的解压目录
+    - 2.Chrome --> 设置 --> 更多工具 --> 扩展程序 --> 加载已解压的扩展程序 --> 选择 ext 的解压目录
 
 
 ## 运行截图
