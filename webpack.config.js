@@ -51,8 +51,8 @@ const config = {
   },
   module: {
     rules: [
-      
-      
+
+
       {
         test: /\.vue$/,
         loader: 'vue-loader',
@@ -110,8 +110,7 @@ const config = {
     new CleanWebpackPlugin(['dist', 'ext.zip']),
     // copy custom static assets
     new CopyWebpackPlugin(
-      [
-        {
+      [{
           from: path.resolve(__dirname, 'src/static/'),
           to: path.resolve(__dirname, 'dist/static/')
         },
@@ -128,8 +127,7 @@ const config = {
           from: path.resolve(__dirname, 'src/manifest.json'),
           to: path.resolve(__dirname, 'dist/manifest.json')
         }
-      ],
-      {
+      ], {
         ignore: ['**/.*', '**/*.map', '**/node_modules/*']
       }
     ),
@@ -158,12 +156,6 @@ if (process.env.NODE_ENV === 'production') {
         NODE_ENV: '"production"'
       }
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: false,
-      compress: {
-        warnings: false
-      }
-    }),
     new webpack.LoaderOptionsPlugin({
       minimize: true
     }),
@@ -186,8 +178,7 @@ if (process.env.NODE_ENV === 'production') {
           console.log(chalk.cyan('An zip of ext is available in ./ext.zip'))
         }
       })
-    }),
-    new ProgressBarPlugin()
+    })
   ])
   module.exports = config
   // webpack(config, (err) => { if (err) throw err})

@@ -1,8 +1,8 @@
-![Logo](https://github.com/leochan2017/ekp-helper/blob/master/2.0/src/static/icons/icon128.png?raw=true)
+![Logo](https://github.com/leochan2017/ekp-helper/blob/master/src/static/icons/icon128.png?raw=true)
 
 ## EKP Helper - A Chrome Plugin Tool for EKP
 ![By Leo](https://img.shields.io/badge/Powered_by-Leo-red.svg?style=flat) 
-![Github file size](https://github.com/leochan2017/ekp-helper/blob/master/2.0/dist.crx.svg)
+![Github file size](https://github.com/leochan2017/ekp-helper/blob/master/dist.crx.svg)
 ![GitHub last commit](https://img.shields.io/github/last-commit/leochan2017/ekp-helper.svg)
 ![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)
 
@@ -24,21 +24,21 @@ Chrome浏览器扩展程序
 ## 如何安装
 
 - OS  用户
-    - 1.下载 [dist.crx](https://github.com/leochan2017/ekp-helper/blob/master/2.0/dist.crx?raw=true)   
-    - 2.Chrome --> 设置 --> 更多工具 --> 扩展程序 --> 拖拽crx文件进去安装
+    - 1.下载 [dist.crx](https://github.com/leochan2017/ekp-helper/blob/master/dist.crx?raw=true)   
+    - 2.Chrome --> 设置 --> 更多工具 --> 扩展程序 --> 拖拽crx文件进行安装
     
 - WIN 用户
-    - 1.下载[dist.zip](https://github.com/leochan2017/ekp-helper/blob/master/2.0/dist.zip?raw=true) 
-    - 2.解压dist.zip
+    - 1.下载[ext.zip](https://github.com/leochan2017/ekp-helper/blob/master/dist.zip?raw=true) 
+    - 2.解压ext.zip
     - 2.Chrome --> 设置 --> 更多工具 --> 扩展程序 --> 加载已解压的扩展程序 --> 选择 /dist/ 的解压目录
 
 
 ## 运行截图
-![截图1](https://github.com/leochan2017/ekp-helper/blob/master/2.0/assets/screenshot1.png?raw=true)
+![截图1](https://github.com/leochan2017/ekp-helper/blob/master/assets/screenshot1.png?raw=true)
 
-![截图2](https://github.com/leochan2017/ekp-helper/blob/master/2.0/assets/screenshot2.png?raw=true)
+![截图2](https://github.com/leochan2017/ekp-helper/blob/master/assets/screenshot2.png?raw=true)
 
-![截图3](https://github.com/leochan2017/ekp-helper/blob/master/2.0/assets/screenshot3.png?raw=true)
+![截图3](https://github.com/leochan2017/ekp-helper/blob/master/assets/screenshot3.png?raw=true)
 
 
 ## 更新历史
@@ -46,7 +46,7 @@ Chrome浏览器扩展程序
     - 介四里一腚没有用过的船新版本
     - 船新的UI
     - 船新的体验
-    - 加载历史数据以列表呈现,任选一条，一键加载内容
+    - 加载历史数据以列表呈现，选择其中一条，一键加载内容，高效提交
 
 - 2018.05.14  v1.1.1
     - 调整插件配置，改正插件名字，防止以后每次更新不会覆盖之前一个的情况出现
