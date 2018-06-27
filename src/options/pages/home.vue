@@ -42,7 +42,7 @@
         <el-button type="danger" @click="reset">清空</el-button>
       </div>
     </el-main>
-    <dialog-history v-if="dialogHistoryDisplay" :show="dialogHistoryDisplay" @hide="historyDialogHide"></dialog-history>
+    <dialog-history :show="dialogHistoryDisplay" @hide="historyDialogHide"></dialog-history>
   </div>
 </template>
 <script>
