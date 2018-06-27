@@ -23,11 +23,11 @@ Chrome浏览器扩展程序
 
 ## 如何安装
 
-- OS  用户
+- MAC OS  用户
     - 1.下载 [dist.crx](https://github.com/leochan2017/ekp-helper/blob/master/dist.crx?raw=true)   
     - 2.Chrome --> 设置 --> 更多工具 --> 扩展程序 --> 拖拽crx文件进行安装
     
-- WIN 用户
+- WINDOWS 用户
     - 1.下载[ext.zip](https://github.com/leochan2017/ekp-helper/blob/master/ext.zip?raw=true) 
     - 2.解压ext.zip
     - 2.Chrome --> 设置 --> 更多工具 --> 扩展程序 --> 加载已解压的扩展程序 --> 选择 ext 的解压目录
