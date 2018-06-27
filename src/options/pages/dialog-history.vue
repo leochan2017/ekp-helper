@@ -1,6 +1,6 @@
 <template>
   <el-dialog title="历史数据" :visible.sync="show" :before-close="closehide" width="70%">
-    <el-table :data="tableData" :default-sort="defaultSort" height="600" border stripe style="width: 100%">
+    <el-table :data="tableData" :default-sort="defaultSort" height="550" border stripe style="width: 100%" empty-text="正在玩命加载中...">
       <el-table-column prop="fdDate" sortable label="填报日期"></el-table-column>
       <el-table-column prop="title" label="内容描述" width="180"></el-table-column>
       <el-table-column prop="fdTaskName" label="任务类型" width="180"></el-table-column>
@@ -18,7 +18,9 @@
         </template>
       </el-table-column>
     </el-table>
-    </el-table>
+    <span slot="footer" class="dialog-footer">
+      <el-button type="primary" @click="getHistoryData">刷新数据</el-button>
+    </span>
   </el-dialog>
 </template>
 <script>
@@ -32,7 +34,6 @@ export default {
   },
   data() {
     return {
-      tableData: [],
       defaultSort: {
         prop: 'fdDate',
         order: 'descending'
@@ -40,26 +41,20 @@ export default {
     }
   },
   computed: {
-
+    tableData() {
+      const tableData = this.$store.state.history.tableData
+      if (!tableData || tableData.length === 0) this.getHistoryData()
+      return tableData
+    }
   },
   mounted() {
-    this.getData()
   },
   methods: {
     closehide(isUpdate, data) {
       this.$emit('hide', isUpdate === true, data)
     },
-    async getData() {
-      let ajaxURL = 'km_workhours_main/kmWorkhoursMain.do?method=worcalendar&pageno=1&s_ajax=true'
-
-      // 加了也没用
-      // ajaxURL += `&fdStart=2018-06-25+00%3A00`
-
-      // ajaxURL += `&fdEnd=2018-07-02+00%3A00`
-
-      const res = await this.$http.get(ajaxURL)
-
-      this.tableData = res.body.main
+    getHistoryData() {
+      this.$store.dispatch('getHistoryData')
     },
     loadItem(item) {
       this.closehide(true, item)
@@ -73,7 +68,7 @@ export default {
         const res = await this.$http.get(ajaxURL)
         if (!res.body.status) return
         this.$notify.success({ message: '删除成功' })
-        this.getData()
+        this.getHistoryData()
       }).catch(_ => {})
     }
   }
