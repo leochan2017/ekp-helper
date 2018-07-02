@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-header class="home-title">
-      <p>EKP辅助 - 重新定义填报工时test</p>
+      <p>EKP辅助 - 重新定义填报工时</p>
     </el-header>
     <el-main class="home-body">
       <el-card>
