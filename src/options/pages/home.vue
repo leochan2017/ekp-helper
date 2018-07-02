@@ -27,7 +27,7 @@
             </el-select>
           </el-form-item>
           <el-form-item label="完成日期" prop="fdDate">
-            <el-date-picker type="date" placeholder="选择日期" v-model="form.fdDate"></el-date-picker>
+            <el-date-picker type="date" placeholder="选择日期" v-model="form.fdDate" @change="datePickerChangeHandle"></el-date-picker>
           </el-form-item>
           <el-form-item label="完成情况">
             <el-slider v-model="form.fdSituation" :step="10" show-stops></el-slider>
@@ -219,6 +219,9 @@ export default {
 
       // dev code
       // this.form.fdTypeId = res.body[0].hoursTypeFdId
+    },
+    datePickerChangeHandle(val) {
+      this.form.fdDate = val
     }
   }
 }
