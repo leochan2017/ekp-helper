@@ -27,7 +27,7 @@
             </el-select>
           </el-form-item>
           <el-form-item label="完成日期" prop="fdDate">
-            <el-date-picker type="date" placeholder="选择日期" v-model="form.fdDate" @change="datePickerChangeHandle"></el-date-picker>
+            <el-date-picker type="date" placeholder="选择日期" v-model="form.fdDate" @change="datePickerChangeHandle" :picker-options="pickerOptions1" value-format="yyyy-MM-dd"></el-date-picker>
           </el-form-item>
           <el-form-item label="完成情况">
             <el-slider v-model="form.fdSituation" :step="10" show-stops></el-slider>
@@ -78,6 +78,28 @@ export default {
         fdTaskId: [{ required: true, message: '请选择任务类型', trigger: 'change' }],
         fdTypeId: [{ required: true, message: '请选择工作任务', trigger: 'change' }],
         fdDate: [{ required: true, message: '请选择日期', trigger: 'change' }]
+      },
+      pickerOptions1: {
+        shortcuts: [{
+          text: '今天',
+          onClick(picker) {
+            picker.$emit('pick', new Date())
+          }
+        }, {
+          text: '昨天',
+          onClick(picker) {
+            const date = new Date()
+            date.setTime(date.getTime() - 3600 * 1000 * 24)
+            picker.$emit('pick', date)
+          }
+        }, {
+          text: '一周前',
+          onClick(picker) {
+            const date = new Date()
+            date.setTime(date.getTime() - 3600 * 1000 * 24 * 7)
+            picker.$emit('pick', date)
+          }
+        }]
       }
     }
   },
@@ -150,6 +172,9 @@ export default {
           fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)));
       return fmt;
     },
+    superCopy: obj => {
+      return JSON.parse(JSON.stringify(obj))
+    },
     // 产品N位随机数
     generateId(n) {
       let chars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f']
@@ -172,13 +197,9 @@ export default {
     onSubmit() {
       if (!this.validateData()) return
 
-      let postData = this.form
+      let postData = this.superCopy(this.form)
       postData.fdId = this.generateId(32)
       postData.docCreateTime = this.formatDate(new Date, 'yyyy-MM-dd hh:mm')
-
-      if (typeof postData.fdDate === 'object') {
-        postData.fdDate = this.formatDate(postData.fdDate, 'yyyy-MM-dd')
-      }
 
       // return console.log(postData)
 
