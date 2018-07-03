@@ -188,6 +188,13 @@ export default {
 
       return nums
     },
+    // 生成高仿山寨EKP的fdid
+    generateEKPfdId() {
+      let str = new Date().getTime().toString(16)
+      str += this.generateId(32)
+      str = str.substr(0, 32)
+      return str
+    },
     // 校验表单
     validateData() {
       let flag = false
@@ -198,7 +205,7 @@ export default {
       if (!this.validateData()) return
 
       let postData = this.superCopy(this.form)
-      postData.fdId = this.generateId(32)
+      postData.fdId = this.generateEKPfdId()
       postData.docCreateTime = this.formatDate(new Date, 'yyyy-MM-dd hh:mm')
 
       // return console.log(postData)
