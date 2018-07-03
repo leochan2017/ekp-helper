@@ -20,23 +20,36 @@ Vue.http.interceptors.push((request, next) => {
     loading = ElementUI.Loading.service({ fullscreen: true })
   }, 600)
 
-  console.log(ElementUI)
+  // console.log(ElementUI)
 
   next(response => {
     clearTimeout(tLoading)
     if (typeof loading === 'object') loading.close()
 
     const body = response.body
-    const status = body.status
+    let flag = false
 
-    if (body && typeof body === 'string' && body.indexOf('账号登录') !== -1) {
-      response.ok = false
-      ElementUI.MessageBox.alert('请先在EKP中登陆后再使用本插件', '温馨提示', {
-        callback: action => {
-          location.href = 'http://product.landray.com.cn/login.jsp'
-        }
-      })
+    // console.log(typeof body)
+    if (!body) {
+      flag = false
+    } else if (typeof body === 'string') {
+      flag = false
+      if (body.indexOf('账号登录') !== -1) {
+        ElementUI.MessageBox.alert('请先在EKP中登陆后再使用本插件', '温馨提示', {
+          callback: action => {
+            location.href = 'http://product.landray.com.cn/login.jsp'
+          }
+        })
+        return
+      }
+    } else if (typeof body === 'object') {
+      flag = true
     }
+
+    if (!flag) ElementUI.Notification.error('数据返回有误，请刷新页面重试。')
+
+    response.ok = flag
+
     return response
   })
 })
