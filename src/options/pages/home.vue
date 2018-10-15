@@ -26,7 +26,7 @@
               <el-option v-for="item in fdTypeList" :label="item.hoursTypeFdName" :key="item.value" :value="item.hoursTypeFdId"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="完成日期" prop="fdDate">
+          <el-form-item label="完成日期(可多选)" prop="fdDate">
             <el-date-picker type="dates" placeholder="选择日期" v-model="form.fdDate" @change="datePickerChangeHandle" :picker-options="pickerOptions1" value-format="yyyy-MM-dd"></el-date-picker>
           </el-form-item>
           <el-form-item label="完成情况">

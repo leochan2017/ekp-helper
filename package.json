@@ -5,7 +5,9 @@
   "description": "An awesome browser extension",
   "scripts": {
     "dev": "cross-env NODE_ENV=development node webpack.config.js --color",
-    "build": "cross-env NODE_ENV=production webpack --progress --colors"
+    "build": "cross-env NODE_ENV=production webpack --progress --colors",
+    "postbuild": "npm run crx",
+    "crx": "crx pack dist -o dist.crx"
   },
   "private": true,
   "dependencies": {
@@ -30,6 +32,7 @@
     "clean-webpack-plugin": "^0.1.17",
     "copy-webpack-plugin": "^4.0.1",
     "cross-env": "^5.2.0",
+    "crx": "^3.2.1",
     "css-loader": "^0.28.1",
     "element-ui": "^2.4.1",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
