@@ -69,7 +69,7 @@ export default {
         fdDescription: '', // 内容
         fdTaskId: '', // 任务类型
         fdTypeId: '', // 工作任务
-        fdDate: '', // 日期
+        fdDate: [], // 日期
         fdSituation: 0, // 完成情况
         fdTime: 0 // 工时
       },
