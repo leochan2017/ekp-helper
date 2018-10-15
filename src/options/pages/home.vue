@@ -3,7 +3,7 @@
     <el-header class="home-title">
       <p>EKP辅助 - 重新定义填报工时</p>
     </el-header>
-    <el-main class="home-body">
+    <el-main class="home-body" >
       <el-card>
         <div slot="header" class="clearfix">
           <template v-if="form.docCreatorName">
@@ -12,7 +12,7 @@
             <el-button style="float: right; padding: 3px 0" type="text" @click="dialogHistoryDisplay = true">查看历史填报数据</el-button>
           </template>
         </div>
-        <el-form ref="form" :rules="rules" :model="form" label-width="80px">
+        <el-form ref="form" :rules="rules" :model="form" label-position="top">
           <el-form-item label="内容描述" prop="fdDescription">
             <el-input type="textarea" v-model="form.fdDescription"></el-input>
           </el-form-item>
@@ -27,7 +27,7 @@
             </el-select>
           </el-form-item>
           <el-form-item label="完成日期" prop="fdDate">
-            <el-date-picker type="date" placeholder="选择日期" v-model="form.fdDate" @change="datePickerChangeHandle" :picker-options="pickerOptions1" value-format="yyyy-MM-dd"></el-date-picker>
+            <el-date-picker type="dates" placeholder="选择日期" v-model="form.fdDate" @change="datePickerChangeHandle" :picker-options="pickerOptions1" value-format="yyyy-MM-dd"></el-date-picker>
           </el-form-item>
           <el-form-item label="完成情况">
             <el-slider v-model="form.fdSituation" :step="10" show-stops></el-slider>
@@ -177,16 +177,11 @@ export default {
     },
     // 产品N位随机数
     generateId(n) {
-      let chars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f']
-
-      let nums = ''
-
-      for (let i = 0; i < n; i++) {
-        let id = parseInt(Math.random() * 16)
-        nums += chars[id]
+      let str = ''
+      while (str.length < n) {
+        str += Math.random().toString(16).slice(2)  
       }
-
-      return nums
+      return str.slice(0, n)
     },
     // 生成高仿山寨EKP的fdid
     generateEKPfdId() {
@@ -203,9 +198,16 @@ export default {
     },
     onSubmit() {
       if (!this.validateData()) return
-
-      let postData = this.superCopy(this.form)
+      const formData = this.superCopy(this.form)
+      this.form.fdDate.forEach((date) => {
+        formData.fdDate = date
+        this.addRecord(formData)
+      })
+    },
+    addRecord (data) {
+      let postData = this.superCopy(data)
       postData.fdId = this.generateEKPfdId()
+      console.log('original record data', postData)
       postData.docCreateTime = this.formatDate(new Date, 'yyyy-MM-dd hh:mm')
 
       // return console.log(postData)
@@ -271,5 +273,11 @@ export default {
 .home-body-foot {
   margin-top: 10px;
   text-align: right;
+}
+.el-form-item > label {
+  padding-bottom: 0 !important;
+}
+.el-form-item__content > div {
+  width: 100% !important;
 }
 </style>
