@@ -41,7 +41,8 @@ const config = {
     // your entry file file (entry.ts or entry.js)
     'background/index': ['./src/background/index.js'],
     'popup/index': ['./src/popup/index.js'],
-    'options/index': ['./src/options/index.js']
+    'options/index': ['./src/options/index.js'],
+    'content/index': ['./src/content/index.js']
   },
   notHotReload: [],
   output: {
@@ -111,22 +112,22 @@ const config = {
     // copy custom static assets
     new CopyWebpackPlugin(
       [{
-          from: path.resolve(__dirname, 'src/static/'),
-          to: path.resolve(__dirname, 'dist/static/')
-        },
-        {
-          context: path.resolve(__dirname, 'src/'),
-          from: '**/index.html',
-          to: path.resolve(__dirname, 'dist')
-        },
-        {
-          from: path.resolve(__dirname, 'src/_locales/'),
-          to: path.resolve(__dirname, 'dist/_locales/')
-        },
-        {
-          from: path.resolve(__dirname, 'src/manifest.json'),
-          to: path.resolve(__dirname, 'dist/manifest.json')
-        }
+        from: path.resolve(__dirname, 'src/static/'),
+        to: path.resolve(__dirname, 'dist/static/')
+      },
+      {
+        context: path.resolve(__dirname, 'src/'),
+        from: '**/index.html',
+        to: path.resolve(__dirname, 'dist')
+      },
+      {
+        from: path.resolve(__dirname, 'src/_locales/'),
+        to: path.resolve(__dirname, 'dist/_locales/')
+      },
+      {
+        from: path.resolve(__dirname, 'src/manifest.json'),
+        to: path.resolve(__dirname, 'dist/manifest.json')
+      }
       ], {
         ignore: ['**/.*', '**/*.map', '**/node_modules/*']
       }
