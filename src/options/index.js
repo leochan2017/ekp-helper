@@ -34,7 +34,7 @@ Vue.http.interceptors.push((request, next) => {
       flag = false
     } else if (typeof body === 'string') {
       flag = false
-      if (body.indexOf('账号登录') !== -1) {
+      if (body.indexOf('账号登录') !== -1 || body.indexOf('登录系统') !== -1 || body.indexOf('忘记密码') !== -1) {
         ElementUI.MessageBox.alert('请先在EKP中登陆后再使用本插件', '温馨提示', {
           callback: action => {
             location.href = 'http://product.landray.com.cn/login.jsp'
