@@ -38,8 +38,8 @@
         </el-form>
       </el-card>
       <div class="home-body-foot">
-        <el-button type="primary" @click="onSubmit">提交</el-button>
         <el-button type="danger" @click="reset">清空</el-button>
+        <el-button type="primary" @click="onSubmit">提交</el-button>
       </div>
     </el-main>
     <dialog-history v-if="dialogHistoryDisplay" :show="dialogHistoryDisplay" @hide="historyDialogHide"></dialog-history>
