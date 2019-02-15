@@ -1,6 +1,6 @@
 <template>
   <div class="popup-warp">
-    <div @click="openMyProject" class="title">
+    <div @click="openMyProject" class="title" title="检查更新">
       <img src="../static/icons/icon48.png">
       <p>EKP辅助</p>
     </div>
@@ -15,14 +15,20 @@
         <li @click="removeWatermarkEkp">
           <img src="../static/icon-yin.png">EKP去水印
         </li>
+        <li @click="openWebDd">
+          <img src="../static/icon-dd.png">钉钉网页版
+        </li>
         <li @click="ddFullScreen">
           <img src="../static/icon-full-screen.png">钉钉网页版全屏
         </li>
         <li @click="removeWatermarkDd">
-          <img src="../static/icon-dd.png">钉钉网页版去水印
+          <img src="../static/icon-yin.png">钉钉网页版去水印
         </li>
         <li @click="hideDdExercise">
           <img src="../static/icon-exercise.png">钉钉网页版屏蔽运动
+        </li>
+        <li @click="openDinnerSystem">
+          <img src="../static/icon-dinner.png">加班订餐系统
         </li>
       </ul>
     </div>
@@ -76,6 +82,10 @@ export default {
         )
       })
     },
+    /** 打开钉钉网页版 */
+    openWebDd() {
+      open('https://im.dingtalk.com/')
+    },
     /** 钉钉网页版全屏 */
     ddFullScreen() {
       this.getCurrentTabId(tabId => {
@@ -124,6 +134,10 @@ export default {
             )
         )
       })
+    },
+    /** 跳转到加班点餐系统 */
+    openDinnerSystem() {
+      open('http://test.ywork.me/yw/pc/dinner2.0/')
     }
   }
 }
