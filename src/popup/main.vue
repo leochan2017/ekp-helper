@@ -76,7 +76,7 @@ export default {
             allFrames: true
           },
           () =>
-            alert(
+            console.log(
               '已经为你注入 EKP去水印 的神秘代码，如果不成功请重试或者找找作者?'
             )
         )
@@ -96,7 +96,7 @@ export default {
               '#layout-main {width: 100% !important;flex: 0 1 100% !important;} #body {height: 100% !important;}'
           },
           () =>
-            alert(
+            console.log(
               '已经为你注入 钉钉网页版全屏 的神秘代码，如果不成功请重试或者找找作者?'
             )
         )
@@ -112,7 +112,7 @@ export default {
             code: '.main-chat {background: none !important;}'
           },
           () =>
-            alert(
+            console.log(
               '已经为你注入 钉钉网页版去水印 的神秘代码，如果不成功请重试或者找找作者?'
             )
         )
@@ -129,7 +129,7 @@ export default {
               'conv-item[con-id^="20981:"] {display: none; !important} conv-item[con-id$=":420217003"] {display: none; !important}'
           },
           () =>
-            alert(
+            console.log(
               '已经为你注入 钉钉网页版屏蔽运动 的神秘代码，如果不成功请重试或者找找作者?'
             )
         )
