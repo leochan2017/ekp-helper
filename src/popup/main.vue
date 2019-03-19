@@ -30,6 +30,9 @@
         <li @click="openDinnerSystem">
           <img src="../static/icon-dinner.png">加班订餐系统
         </li>
+        <li @click="hideBiHuMode">
+          <img src="../static/icon-bihu.png">逼乎神隐模式
+        </li>
       </ul>
     </div>
   </div>
@@ -109,7 +112,7 @@ export default {
         chrome.tabs.insertCSS(
           tabId,
           {
-            code: '.main-chat {background: none !important;}'
+            code: '.main-chat {background: none !important;} .detail-box {background: none !important;}'
           },
           () =>
             console.log(
@@ -138,6 +141,21 @@ export default {
     /** 跳转到加班点餐系统 */
     openDinnerSystem() {
       open('http://test.ywork.me/yw/pc/dinner2.0/')
+    },
+    /** 注入逼乎神隐模式代码 */
+    hideBiHuMode() {
+      this.getCurrentTabId(tabId => {
+        chrome.tabs.insertCSS(
+          tabId,
+          {
+            code: '.ZhihuLogo {display: none !important;} .AppHeader {display: none !important;}'
+          },
+          () =>
+            console.log(
+              '已经为你注入 逼乎神隐模式 的神秘代码，如果不成功请重试或者找找作者?'
+            )
+        )
+      })
     }
   }
 }
