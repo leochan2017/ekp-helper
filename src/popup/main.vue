@@ -148,7 +148,7 @@ export default {
         chrome.tabs.insertCSS(
           tabId,
           {
-            code: '.ZhihuLogo {display: none !important;} .AppHeader {display: none !important;} .Sticky {display: none !important;} .Topstory-mainColumn {width: 1024px !important;} .Question-mainColumn {width: 1024px !important;}'
+            code: '.ZhihuLogo {display: none !important;} .AppHeader {display: none !important;} .GlobalSideBar {display: none !important;} .Topstory-mainColumn {width: 1024px !important;} .Question-mainColumn {width: 1024px !important;} .ContentItem-actions {display: none !important;} .ContentItem-actions.RichContent-actions {display: flex !important;} .RichContent.is-collapsed {min-height: 100px !important;} .Question-sideColumn {display:none !important;}'
           },
           () =>
             console.log(
