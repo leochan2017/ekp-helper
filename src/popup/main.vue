@@ -148,14 +148,19 @@ export default {
         chrome.tabs.insertCSS(
           tabId,
           {
-            code: '.ZhihuLogo {display: none !important;} .AppHeader {display: none !important;}'
+            code: '.ZhihuLogo {display: none !important;} .AppHeader {display: none !important;} .Sticky {display: none !important;} .Topstory-mainColumn {width: 1024px !important;} .Question-mainColumn {width: 1024px !important;}'
           },
           () =>
             console.log(
               '已经为你注入 逼乎神隐模式 的神秘代码，如果不成功请重试或者找找作者?'
             )
         )
+        chrome.tabs.executeScript(tabId, {
+          code:
+            'document.getElementsByTagName("title")[0].innerHTML = "前端开发进阶指南";'
+        })
       })
+
     }
   }
 }
