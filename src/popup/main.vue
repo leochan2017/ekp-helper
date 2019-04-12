@@ -112,7 +112,7 @@ export default {
         chrome.tabs.insertCSS(
           tabId,
           {
-            code: '.main-chat {background: none !important;} .detail-box {background: none !important;}'
+            code: '.main-chat {background: none !important;} .detail-box, .org-member-inner {background: none !important;}'
           },
           () =>
             console.log(
