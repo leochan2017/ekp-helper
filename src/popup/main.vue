@@ -145,10 +145,11 @@ export default {
     /** 注入逼乎神隐模式代码 */
     hideBiHuMode() {
       this.getCurrentTabId(tabId => {
+        // .Question-mainColumn {width: 1024px !important;}
         chrome.tabs.insertCSS(
           tabId,
           {
-            code: '.ZhihuLogo {display: none !important;} .AppHeader {display: none !important;} .GlobalSideBar {display: none !important;} .Topstory-mainColumn {width: 1024px !important;} .Question-mainColumn {width: 1024px !important;} .ContentItem-actions {display: none !important;} .ContentItem-actions.RichContent-actions {display: flex !important;} .RichContent.is-collapsed {min-height: 100px !important;} .Question-sideColumn {display:none !important;}'
+            code: '.ZhihuLogo {display: none !important;} .AppHeader {display: none !important;} .GlobalSideBar {display: none !important;} .Topstory-mainColumn {width: 1024px !important;} .Question-mainColumn {width: 1024px !important;}  .ContentItem-actions.RichContent-actions {display: flex !important;} .RichContent.is-collapsed {min-height: 100px !important;} .Question-sideColumn {display:none !important;} .RichContent figure, .RichContent .RichText-video {width: 60%;}'
           },
           () =>
             console.log(
