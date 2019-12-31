@@ -1,7 +1,7 @@
 {
-  "name": "2.0",
+  "name": "EKPHelper",
   "author": "Leo <leochan2017@gmail.com>",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "An awesome browser extension",
   "scripts": {
     "dev": "cross-env NODE_ENV=development node webpack.config.js --color",

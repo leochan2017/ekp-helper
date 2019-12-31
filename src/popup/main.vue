@@ -1,37 +1,43 @@
 <template>
   <div class="popup-warp">
     <div @click="openMyProject" class="title" title="检查更新">
-      <img src="../static/icons/icon48.png">
+      <img src="../static/icons/icon48.png" />
       <p>EKP辅助</p>
     </div>
     <div class="content">
       <ul>
         <li @click="openWorkReportList">
-          <img src="../static/icon-list.png">查看工时信息
+          <img src="../static/icon-list.png" />查看工时信息[旧]
         </li>
         <li @click="openWriteWorkReportPage">
-          <img src="../static/icon-write.png">快速填报工时
+          <img src="../static/icon-write.png" />快速填报工时[旧]
+        </li>
+        <li @click="openApprove">
+          <img src="../static/icon-approve.png" />查看工时审批列表
+        </li>
+        <li @click="doneAllApproveInThisPage">
+          <img src="../static/icon-yijian.png" />一键审批当前列表
         </li>
         <li @click="removeWatermarkEkp">
-          <img src="../static/icon-yin.png">EKP去水印
+          <img src="../static/icon-yin.png" />EKP去水印
         </li>
         <li @click="openWebDd">
-          <img src="../static/icon-dd.png">钉钉网页版
+          <img src="../static/icon-dd.png" />钉钉网页版
         </li>
         <li @click="ddFullScreen">
-          <img src="../static/icon-full-screen.png">钉钉网页版全屏
+          <img src="../static/icon-full-screen.png" />钉钉网页版全屏
         </li>
         <li @click="removeWatermarkDd">
-          <img src="../static/icon-yin.png">钉钉网页版去水印
+          <img src="../static/icon-yin.png" />钉钉网页版去水印
         </li>
         <li @click="hideDdExercise">
-          <img src="../static/icon-exercise.png">钉钉网页版屏蔽运动
+          <img src="../static/icon-exercise.png" />钉钉网页版屏蔽运动
         </li>
         <li @click="openDinnerSystem">
-          <img src="../static/icon-dinner.png">加班订餐系统
+          <img src="../static/icon-dinner.png" />加班订餐系统
         </li>
         <li @click="hideBiHuMode">
-          <img src="../static/icon-bihu.png">逼乎神隐模式
+          <img src="../static/icon-bihu.png" />逼乎神隐模式
         </li>
       </ul>
     </div>
@@ -63,6 +69,21 @@ export default {
     /** 快速填报工时 */
     openWriteWorkReportPage() {
       open('../options/index.html')
+    },
+    /** 查看工时审批(新) */
+    openApprove() {
+      open(
+        'http://product.landray.com.cn/prod/manage/#j_path=%2FreviewWorkhours'
+      )
+    },
+    /** 一键审批一键审批当前工时列表 */
+    doneAllApproveInThisPage() {
+      this.getCurrentTabId(tabId => {
+        chrome.tabs.executeScript(tabId, {
+          code:
+            "for (var item of document.querySelectorAll('.btn_txt')) { if (item.innerText.indexOf('通过') !== -1) { eval(item.href) } };"
+        })
+      })
     },
     /** 去水印 ekp */
     removeWatermarkEkp() {
@@ -112,7 +133,8 @@ export default {
         chrome.tabs.insertCSS(
           tabId,
           {
-            code: '.main-chat {background: none !important;} .detail-box, .org-member-inner {background: none !important;}'
+            code:
+              '.main-chat {background: none !important;} .detail-box, .org-member-inner {background: none !important;}'
           },
           () =>
             console.log(
@@ -149,7 +171,8 @@ export default {
         chrome.tabs.insertCSS(
           tabId,
           {
-            code: '.ZhihuLogo {display: none !important;} .AppHeader {display: none !important;} .GlobalSideBar {display: none !important;} .Topstory-mainColumn {width: 1024px !important;} .Question-mainColumn {width: 1024px !important;}  .ContentItem-actions.RichContent-actions {display: flex !important;} .RichContent.is-collapsed {min-height: 100px !important;} .Question-sideColumn {display:none !important;} .RichContent figure, .RichContent .RichText-video {width: 60%;}'
+            code:
+              '.ZhihuLogo {display: none !important;} .AppHeader {display: none !important;} .GlobalSideBar {display: none !important;} .Topstory-mainColumn {width: 1024px !important;} .Question-mainColumn {width: 1024px !important;}  .ContentItem-actions.RichContent-actions {display: flex !important;} .RichContent.is-collapsed {min-height: 100px !important;} .Question-sideColumn {display:none !important;} .RichContent figure, .RichContent .RichText-video {width: 60%;}'
           },
           () =>
             console.log(
@@ -161,7 +184,6 @@ export default {
             'document.getElementsByTagName("title")[0].innerHTML = "前端开发进阶指南";'
         })
       })
-
     }
   }
 }
