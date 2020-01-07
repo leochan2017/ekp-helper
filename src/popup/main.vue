@@ -12,8 +12,11 @@
         <li @click="openWriteWorkReportPage">
           <img src="../static/icon-write.png" />快速填报工时[旧]
         </li>
-        <li @click="openApprove">
-          <img src="../static/icon-approve.png" />查看工时审批列表
+        <li @click="openApproveAll">
+          <img src="../static/icon-approve.png" />工时审批列表[总]
+        </li>
+        <li @click="openApproveIframe">
+          <img src="../static/icon-approve.png" />工时审批列表[部分]
         </li>
         <li @click="doneAllApproveInThisPage">
           <img src="../static/icon-yijian.png" />一键审批当前列表
@@ -70,18 +73,24 @@ export default {
     openWriteWorkReportPage() {
       open('../options/index.html')
     },
-    /** 查看工时审批(新) */
-    openApprove() {
+    /** 查看工时审批(总) */
+    openApproveAll() {
       open(
         'http://product.landray.com.cn/prod/manage/#j_path=%2FreviewWorkhours'
       )
     },
-    /** 一键审批一键审批当前工时列表 */
+    /** 查看工时审批(局部) */
+    openApproveIframe() {
+      open(
+        'http://product.landray.com.cn/prod/manage/prod_manage_workhours/index_review.jsp'
+      )
+    },
+    /** 一键审批当前工时列表 */
     doneAllApproveInThisPage() {
       this.getCurrentTabId(tabId => {
         chrome.tabs.executeScript(tabId, {
           code:
-            "for (var item of document.querySelectorAll('.btn_txt')) { if (item.innerText.indexOf('通过') !== -1) { eval(item.href) } };"
+            "for (var item of document.querySelectorAll('.btn_txt')) { if (item.innerText.indexOf('通过') !== -1) { item.click() } };"
         })
       })
     },
